@@ -1,0 +1,273 @@
+/**
+ * Global motion & interaction polish — shared timing, surfaces, links
+ */
+
+/* ——— Surface cards (trust, contact, inner pages) ——— */
+.surface-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    background-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium),
+    transform var(--duration-hover) var(--ease-premium);
+}
+
+.surface-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    ellipse 80% 50% at 50% 0%,
+    rgba(43, 107, 255, 0.06) 0%,
+    transparent 65%
+  );
+  transition: opacity var(--duration-hover) var(--ease-premium);
+}
+
+.surface-card:hover {
+  border-color: rgba(43, 107, 255, 0.22);
+  background: rgba(8, 10, 14, 0.85);
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 16px 40px rgba(0, 0, 0, 0.32);
+}
+
+.surface-card:hover::before {
+  opacity: 1;
+}
+
+.surface-card__index {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: rgba(43, 107, 255, 0.22);
+  transition: color var(--duration-hover) var(--ease-premium);
+}
+
+.surface-card:hover .surface-card__index {
+  color: rgba(77, 143, 255, 0.38);
+}
+
+/* ——— Pillar grid (why section) ——— */
+.pillar-cell {
+  position: relative;
+  transition: background-color var(--duration-hover) var(--ease-premium);
+}
+
+.pillar-cell::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.75rem;
+  bottom: 1.75rem;
+  width: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+  opacity: 0;
+  transform: scaleY(0.4);
+  transition:
+    opacity var(--duration-hover) var(--ease-premium),
+    transform var(--duration-hover) var(--ease-out-expo);
+}
+
+@media (min-width: 768px) {
+  .pillar-cell:hover {
+    background: rgba(14, 17, 24, 0.65) !important;
+  }
+
+  .pillar-cell:hover::after {
+    opacity: 0.7;
+    transform: scaleY(1);
+  }
+}
+
+.pillar-cell__index {
+  transition: color var(--duration-hover) var(--ease-premium);
+}
+
+.pillar-cell:hover .pillar-cell__index {
+  color: rgba(77, 143, 255, 0.45);
+}
+
+/* ——— Process steps ——— */
+.process-step {
+  position: relative;
+  transition:
+    border-color var(--duration-ui) var(--ease-premium),
+    padding-left var(--duration-hover) var(--ease-premium);
+}
+
+@media (min-width: 768px) {
+  .process-step:hover {
+    padding-left: 0.25rem;
+  }
+}
+
+.process-step__num {
+  transition:
+    color var(--duration-hover) var(--ease-premium),
+    transform var(--duration-hover) var(--ease-premium);
+}
+
+.process-step:hover .process-step__num {
+  color: var(--color-accent-bright);
+  transform: translateX(2px);
+}
+
+/* ——— Interactive links ——— */
+.link-interactive {
+  position: relative;
+  text-decoration: none;
+  transition: color var(--duration-ui) var(--ease-premium);
+}
+
+.link-interactive:hover {
+  color: var(--color-accent-bright);
+}
+
+/* ——— Contact panel ——— */
+.contact-panel {
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium);
+}
+
+.contact-panel:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+}
+
+/* ——— CTA panel motion ——— */
+.cta-panel {
+  transition:
+    border-color var(--duration-hover) var(--ease-premium),
+    box-shadow var(--duration-hover) var(--ease-premium),
+    transform var(--duration-hover) var(--ease-premium);
+}
+
+.cta-scene:hover .cta-panel {
+  border-color: rgba(43, 107, 255, 0.18);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 36px 88px rgba(0, 0, 0, 0.58),
+    0 0 60px rgba(43, 107, 255, 0.04);
+}
+
+/* ——— Mobile nav ——— */
+.mobile-nav-overlay {
+  transition:
+    opacity var(--duration-ui) var(--ease-premium),
+    visibility var(--duration-ui) var(--ease-premium);
+}
+
+.mobile-nav-link {
+  transition:
+    color var(--duration-ui) var(--ease-premium),
+    background-color var(--duration-ui) var(--ease-premium),
+    transform var(--duration-ui) var(--ease-premium);
+}
+
+.mobile-nav-link:active {
+  transform: scale(0.98);
+}
+
+/* ——— Mobile sticky bar ——— */
+.mobile-sticky-bar {
+  transition:
+    border-color var(--duration-ui) var(--ease-premium),
+    background-color var(--duration-ui) var(--ease-premium);
+}
+
+.mobile-sticky-action {
+  transition:
+    color var(--duration-micro) var(--ease-premium),
+    background-color var(--duration-micro) var(--ease-premium);
+}
+
+.mobile-sticky-action:active {
+  transform: scale(0.97);
+  transition-duration: var(--duration-instant);
+}
+
+/* ——— Section header rhythm ——— */
+.section-header {
+  margin-bottom: clamp(3.25rem, 6.5vw, 5rem);
+}
+
+.section-header--with-actions {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  max-width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .section-header--with-actions {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.section-header__copy {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .section-header--with-actions .section-header__copy {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+  }
+}
+
+.section-header__title {
+  max-width: none;
+  min-width: 0;
+  text-wrap: balance;
+}
+
+.section-header__desc {
+  margin-top: 1.375rem;
+  max-width: min(42rem, 100%);
+}
+
+@media (min-width: 768px) {
+  .section-header__desc {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .surface-card,
+  .surface-card::before,
+  .pillar-cell,
+  .pillar-cell::after,
+  .process-step,
+  .process-step__num,
+  .cta-panel,
+  .mobile-nav-link,
+  .mobile-sticky-action {
+    transition: none;
+  }
+
+  .surface-card:hover,
+  .process-step:hover .process-step__num {
+    transform: none;
+  }
+}
