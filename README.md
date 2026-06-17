@@ -13,12 +13,18 @@ Tarayıcı: [http://127.0.0.1:3000](http://127.0.0.1:3000) (localhost ile aynı)
 
 ### Değişiklikler yansımıyorsa
 
-1. Dosyayı **kaydedin** (Cmd+S) — kayıtsız düzenleme tarayıcıya gitmez.
-2. Terminalde `npm run dev` çalışıyor olmalı; her `npm run dev` sunucuyu **yeniden başlatır**.
-3. Hâlâ eski görünüm: `npm run dev:reset` (.next önbelleğini siler, temiz başlar).
+1. Dosyayı **kaydedin** (Cmd+S).
+2. Terminalde `npm run dev` açık kalsın — kayıt sonrası HMR yansır.
+3. Takılırsa: `npm run dev:restart` veya `npm run dev:reset`.
 4. Tarayıcıda **Cmd+Shift+R** (sert yenileme).
-5. Metin için `src/content/`, stil için `src/styles/` — doğru dosyayı düzenleyin.
-6. Son çare: `npm run dev:webpack` (Turbopack yerine webpack HMR).
+
+## Canlı site (Vercel)
+
+GitHub’daki kod otomatik deploy olur. Ana adres repo **About** alanında:
+
+**https://ulus-swart.vercel.app**
+
+Deploy güncellenmediyse Vercel panelinde projeyi açıp **Redeploy** → **main** branch.
 
 ## Logo
 
