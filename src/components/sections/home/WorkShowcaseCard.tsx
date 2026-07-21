@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { CaseStudy } from "@/types/content";
 import { workCardCta } from "@/content/home";
@@ -23,11 +24,21 @@ export function WorkShowcaseCard({ index, project }: WorkShowcaseCardProps) {
       }
     >
       <div className="template-card__media">
-        <WorkPreview
-          type={project.preview}
-          client={project.client}
-          theme={project.theme}
-        />
+        {project.coverImage ? (
+          <Image
+            src={project.coverImage}
+            alt={`${project.client} web sitesi önizlemesi`}
+            placeholder="blur"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="template-card__cover"
+          />
+        ) : (
+          <WorkPreview
+            type={project.preview}
+            client={project.client}
+            theme={project.theme}
+          />
+        )}
       </div>
 
       <div className="template-card__body">

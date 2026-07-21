@@ -1,3 +1,5 @@
+import { site } from "@/content/site";
+
 export const stickyBar = {
   call: "Ara",
   whatsapp: "WhatsApp",
@@ -20,8 +22,7 @@ export const contactPage = {
   submit: "Görüşme Talebi Gönder",
   success:
     "Teşekkürler! Mesajınız bize ulaştı. En kısa sürede sizinle iletişime geçeceğiz.",
-  error:
-    "Bir sorun oluştu. Lütfen tekrar deneyin veya hello@ulusmedia.com adresine yazın.",
+  error: `Bir sorun oluştu. Lütfen tekrar deneyin veya ${site.email} adresine yazın.`,
   kvkk: "Kişisel verilerimin KVKK Aydınlatma Metni kapsamında işlenmesini kabul ediyorum.",
 };
 
@@ -72,7 +73,7 @@ export const privacyPage = {
     },
     {
       title: "Haklarınız",
-      body: "KVKK kapsamındaki erişim, düzeltme, silme ve itiraz haklarınızı hello@ulusmedia.com adresine yazarak kullanabilirsiniz.",
+      body: `KVKK kapsamındaki erişim, düzeltme, silme ve itiraz haklarınızı ${site.email} adresine yazarak kullanabilirsiniz.`,
     },
   ],
 };
@@ -100,7 +101,7 @@ export const kvkkPage = {
     },
     {
       title: "Başvuru",
-      body: "KVKK m.11 kapsamındaki taleplerinizi hello@ulusmedia.com üzerinden iletebilirsiniz; başvurularınız en geç 30 gün içinde sonuçlandırılır.",
+      body: `KVKK m.11 kapsamındaki taleplerinizi ${site.email} üzerinden iletebilirsiniz; başvurularınız en geç 30 gün içinde sonuçlandırılır.`,
     },
   ],
 };
@@ -141,6 +142,6 @@ export const placeholderPages = {
     overline: "PORTFÖY",
     title: "Seçilmiş müşteri işleri",
     description:
-      "Web, marka, reklam ve içerik projelerinden oluşan portföyümüz. Her proje; sektör, kapsam ve sonuç metrikleriyle listelenir.",
+      "Web, reklam ve sosyal medya projelerinden oluşan portföyümüz. Her proje; sektör ve kapsamıyla birlikte listelenir.",
   },
 };

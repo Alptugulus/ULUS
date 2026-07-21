@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
 import { site } from "@/content/site";
 import { consultationMicrocopy, consultationSteps } from "@/content/agency";
 import {
@@ -13,7 +16,54 @@ interface ContactConsultationProps {
   showTitle?: boolean;
 }
 
+type SubmitState = "idle" | "error" | "sent";
+
 export function ContactConsultation({ showTitle = true }: ContactConsultationProps) {
+  const [status, setStatus] = useState<SubmitState>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const name = String(data.get("name") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+
+    if (!name || !message) {
+      setStatus("error");
+      setErrorMessage("Lütfen ad soyad ve proje bilgisi alanlarını doldurun.");
+      return;
+    }
+    if (!phone && !email) {
+      setStatus("error");
+      setErrorMessage("Size ulaşabilmemiz için telefon veya e-posta bilgisi gerekli.");
+      return;
+    }
+
+    const company = String(data.get("company") ?? "").trim();
+    const service = String(data.get("service") ?? "").trim();
+
+    const bodyLines = [
+      `Ad Soyad: ${name}`,
+      company && `Firma / Marka: ${company}`,
+      phone && `Telefon: ${phone}`,
+      email && `E-posta: ${email}`,
+      service && `İlgilendiği hizmet: ${service}`,
+      "",
+      "Proje hakkında:",
+      message,
+    ].filter(Boolean);
+
+    const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
+      `Görüşme talebi — ${name}`
+    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+
+    setStatus("sent");
+    setErrorMessage("");
+    window.location.href = mailto;
+  }
+
   return (
     <div className="consultation-scene">
       {showTitle && (
@@ -30,7 +80,7 @@ export function ContactConsultation({ showTitle = true }: ContactConsultationPro
           <div className="consultation-panel__glow" aria-hidden />
           <div className="relative z-10">
             <p className="label-chip mb-6">Görüşme talebi</p>
-            <form className="space-y-5" action="#" method="post">
+            <form className="space-y-5" onSubmit={handleSubmit} noValidate>
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="consultation-form__field sm:col-span-2">
                   <label className="consultation-form__label" htmlFor="contact-name">
@@ -43,6 +93,7 @@ export function ContactConsultation({ showTitle = true }: ContactConsultationPro
                     className="consultation-form__input"
                     placeholder={formFields.name.placeholder}
                     autoComplete="name"
+                    required
                   />
                 </div>
                 <div className="consultation-form__field">
@@ -103,29 +154,38 @@ export function ContactConsultation({ showTitle = true }: ContactConsultationPro
                     ))}
                   </select>
                 </div>
-                <div className="consultation-form__field">
+                <div className="consultation-form__field sm:col-span-2">
                   <label className="consultation-form__label" htmlFor="contact-message">
                     {formFields.message.label}
                   </label>
-                  <input
+                  <textarea
                     id="contact-message"
                     name="message"
-                    type="text"
-                    className="consultation-form__input"
+                    rows={4}
+                    className="consultation-form__input consultation-form__textarea"
                     placeholder={formFields.message.placeholder}
+                    required
                   />
                 </div>
               </div>
               <p className="text-xs leading-relaxed text-foreground-subtle">{contactPage.kvkk}</p>
-              <Button type="button" size="lg" className="btn-premium w-full sm:w-auto">
+              <Button type="submit" size="lg" className="btn-premium w-full sm:w-auto">
                 {contactPage.submit}
               </Button>
+              <div role="status" aria-live="polite">
+                {status === "error" && (
+                  <p className="text-xs text-red-400">{errorMessage}</p>
+                )}
+                {status === "sent" && (
+                  <p className="text-xs text-accent-bright">{contactPage.success}</p>
+                )}
+              </div>
               <p className="text-xs text-foreground-subtle">
-                Form entegrasyonu yakında aktif. Şimdilik{" "}
+                Form, e-posta uygulamanızı önceden doldurulmuş bir taslakla açar. Doğrudan yazmak isterseniz{" "}
                 <a href={`mailto:${site.email}`} className="link-interactive text-accent-bright">
                   {site.email}
                 </a>{" "}
-                veya telefon ile ulaşabilirsiniz.
+                adresine ulaşabilirsiniz.
               </p>
             </form>
           </div>

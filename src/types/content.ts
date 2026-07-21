@@ -1,3 +1,5 @@
+import type { StaticImageData } from "next/image";
+
 export interface SeoFields {
   title: string;
   description: string;
@@ -95,7 +97,8 @@ export interface CaseStudy {
   services: string[];
   excerpt: string;
   caseNote?: string;
-  coverImage?: string;
+  coverImage?: StaticImageData;
+  liveUrl?: string;
   preview: WorkPreviewType;
   layout: WorkLayoutSlot;
   year: string;

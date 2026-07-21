@@ -7,7 +7,7 @@ export const site: SiteConfig = {
   url: "https://ulusmedia.com",
   phone: "+90 535 202 60 06",
   phoneHref: "tel:+905352026006",
-  email: "hello@ulusmedia.com",
+  email: "hello@ulusmedya.tr",
   logo: "/images/ulusmedia-logo.png",
   logoWidth: 712,
   logoHeight: 383,

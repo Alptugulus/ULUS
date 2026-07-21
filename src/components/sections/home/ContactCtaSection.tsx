@@ -43,6 +43,7 @@ export function ContactCtaSection() {
                     href={ctaBand.cta.href}
                     size="lg"
                     className="btn-premium w-full min-w-[220px] sm:w-auto"
+                    magnetic
                   >
                     {ctaBand.cta.label}
                   </Button>
