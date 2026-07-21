@@ -4,6 +4,7 @@ import { createMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { MotionReveal, MotionItem } from "@/motion/MotionReveal";
+import { AnimatedCounter } from "@/motion/AnimatedCounter";
 
 export const metadata = createMetadata({
   title: "Hakkımızda",
@@ -26,7 +27,7 @@ export default function HakkimizdaPage() {
         <div className="agency-stats mt-12">
           {agencyStats.map((stat) => (
             <div key={stat.label} className="agency-stat">
-              <span className="agency-stat__value">{stat.value}</span>
+              <AnimatedCounter value={stat.value} className="agency-stat__value" />
               <span className="agency-stat__label">{stat.label}</span>
             </div>
           ))}

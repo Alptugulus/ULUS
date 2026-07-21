@@ -1,10 +1,49 @@
-import type { CSSProperties } from "react";
+"use client";
 
-/** Hero — canlı ajans paneli mockup (light/dark uyumlu) */
+import { useRef, type CSSProperties, type MouseEvent } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useReducedMotion } from "@/motion/useReducedMotion";
+
+/** Hero — canlı ajans paneli mockup (light/dark uyumlu), imleçle hafif 3D tilt */
 export function HeroVisual() {
+  const reducedMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const mx = useMotionValue(0.5);
+  const my = useMotionValue(0.5);
+  const springX = useSpring(mx, { stiffness: 150, damping: 20, mass: 0.4 });
+  const springY = useSpring(my, { stiffness: 150, damping: 20, mass: 0.4 });
+  const rotateX = useTransform(springY, [0, 1], [6, -6]);
+  const rotateY = useTransform(springX, [0, 1], [-6, 6]);
+
+  function handleMouseMove(event: MouseEvent<HTMLDivElement>) {
+    if (reducedMotion || !ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    mx.set((event.clientX - rect.left) / rect.width);
+    my.set((event.clientY - rect.top) / rect.height);
+  }
+
+  function handleMouseLeave() {
+    mx.set(0.5);
+    my.set(0.5);
+  }
+
   return (
-    <div className="template-hero__visual" aria-hidden>
-      <div className="hero-mockup">
+    <div
+      className="template-hero__visual"
+      aria-hidden
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ perspective: 1400 }}
+    >
+      <motion.div
+        className="hero-mockup"
+        style={
+          reducedMotion
+            ? undefined
+            : ({ rotateX, rotateY, transformStyle: "preserve-3d" } as CSSProperties)
+        }
+      >
         <div className="hero-mockup__chrome">
           <div className="hero-mockup__dots">
             <span className="hero-mockup__dot hero-mockup__dot--close" />
@@ -67,7 +106,7 @@ export function HeroVisual() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

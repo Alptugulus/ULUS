@@ -58,6 +58,7 @@ export function SiteHeader() {
               href={headerCta.href}
               size="lg"
               className="btn-premium min-h-[3.25rem] px-8 text-base shadow-[var(--shadow-accent)] lg:min-h-[3.5rem] lg:px-9 lg:text-[1.0625rem]"
+              magnetic
             >
               {headerCta.label}
             </Button>

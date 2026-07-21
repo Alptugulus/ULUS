@@ -205,6 +205,32 @@ html.light .nav-link:hover {
   transition-duration: var(--duration-instant);
 }
 
+/* ——— Magnetic CTA — imleci takip eden çekim + parlama ——— */
+.btn-magnetic {
+  transition: transform 0.35s var(--ease-premium);
+}
+
+.btn-magnetic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(140px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.3), transparent 65%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.btn-magnetic:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-magnetic {
+    transition: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

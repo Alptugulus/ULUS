@@ -35,7 +35,7 @@ export function HeroSection() {
               </MotionItem>
               <MotionItem>
                 <div className="template-hero__actions">
-                  <Button href={hero.cta.href} size="lg" className="btn-hero-cta btn-premium">
+                  <Button href={hero.cta.href} size="lg" className="btn-hero-cta btn-premium" magnetic>
                     {hero.cta.label}
                   </Button>
                   <Button

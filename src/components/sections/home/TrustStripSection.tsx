@@ -3,6 +3,7 @@ import { trustItems } from "@/content/trust";
 import { agencyCredentials, agencyStats } from "@/content/agency";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { MotionReveal, MotionItem } from "@/motion/MotionReveal";
+import { AnimatedCounter } from "@/motion/AnimatedCounter";
 
 export function TrustStripSection() {
   return (
@@ -18,7 +19,7 @@ export function TrustStripSection() {
       <div className="template-stat-bar">
         {agencyStats.map((stat) => (
           <div key={stat.label} className="template-stat-bar__item">
-            <span className="template-stat-bar__value">{stat.value}</span>
+            <AnimatedCounter value={stat.value} className="template-stat-bar__value" />
             <span className="template-stat-bar__label">{stat.label}</span>
           </div>
         ))}
