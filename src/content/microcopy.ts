@@ -85,7 +85,7 @@ export const kvkkPage = {
   sections: [
     {
       title: "Veri sorumlusu",
-      body: "ULUS MEDIA (ulusmedia.com) kişisel verileriniz bakımından veri sorumlusudur.",
+      body: `ULUS MEDIA (${site.domain}) kişisel verileriniz bakımından veri sorumlusudur.`,
     },
     {
       title: "İşlenen veri kategorileri",

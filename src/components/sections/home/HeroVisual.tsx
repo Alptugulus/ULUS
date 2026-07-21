@@ -52,7 +52,7 @@ export function HeroVisual() {
           </div>
           <div className="hero-mockup__url">
             <span className="hero-mockup__url-lock" />
-            <span className="hero-mockup__url-text">ulusmedia.com / panel</span>
+            <span className="hero-mockup__url-text">ulusmedya.tr / panel</span>
           </div>
         </div>
 
